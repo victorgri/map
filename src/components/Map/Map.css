@@ -1,0 +1,25 @@
+.container {
+  width: 100wv;
+  height: 100vh;
+}
+
+.popup {
+  position: absolute;
+  background: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  z-index: 1000;
+}
+
+.button {
+  background-color: rgb(22, 159, 201);
+  color: #fff;
+  border-radius: 24px;
+  text-align: center;
+  width: 200px;
+
+  &:hover {
+    background-color: blue;
+    color: #ccc;
+  }
+}
