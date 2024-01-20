@@ -15,7 +15,7 @@ const Popup = ({ formData, onInputChange, onSave, onCancel }) => {
           onChange={(e) => {
             setCenter(prev => ({
               ...prev,
-              lat: Number(e.target.value)
+              lat: prev.lat + 0.1
             }))
             onInputChange("latitude", e.target.value)
           }}
@@ -29,7 +29,7 @@ const Popup = ({ formData, onInputChange, onSave, onCancel }) => {
           onChange={(e) => {
             setCenter(prev => ({
               ...prev,
-              lng: Number(e.target.value)
+              lng: prev.lng + 0.1
             }))
             onInputChange("longitude", e.target.value)
           }}
