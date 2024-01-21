@@ -1,9 +1,11 @@
-import { GoogleMap } from "@react-google-maps/api";
-import { useCallback, useRef, useState } from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
+import { useCallback, useContext, useRef, useState } from "react";
 
 import './Map.css';
 import Popup from "../Popup/Popup";
 import { CurrentLocationMarker } from "../CurrentLocationMarker/CurrentLocationMarker";
+import { CenterContext } from "../../context";
+import markerImg from '../../assets/img/sponge-bob.svg';
 
 const containerStyle = {
   width: '100%',
@@ -24,7 +26,15 @@ const defaulOptions = {
   fullscreenControll: true,
 };
 
-export const Map = ({ center }) => {
+export const Map = () => {
+  const {
+    addMarker,
+    center,
+    markers,
+    label,
+    id,
+    setId
+  } = useContext(CenterContext);
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [formData, setFormData] = useState({
     longitude: 0,
@@ -34,7 +44,10 @@ export const Map = ({ center }) => {
     tag: "",
   });
 
+  console.log(markers);
+
   const openPopup = () => {
+
     setPopupOpen(true);
   };
 
@@ -47,6 +60,8 @@ export const Map = ({ center }) => {
   };
 
   const handleSave = () => {
+    setId(prev => prev + 1)
+    addMarker(center, id, label);
     closePopup();
   };
 
@@ -71,7 +86,17 @@ export const Map = ({ center }) => {
         options={defaulOptions}
         onClick={openPopup}
       >
-        <CurrentLocationMarker position={center}/>
+        <CurrentLocationMarker position={center} />
+        {
+          markers.map(marker => (
+          <Marker
+            position={marker.pos}
+            label={marker.title}
+            img={markerImg}
+            key={marker.key}
+          />
+          ))
+        }
         {isPopupOpen && (
           <Popup
             formData={formData}
