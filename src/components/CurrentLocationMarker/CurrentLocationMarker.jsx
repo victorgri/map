@@ -1,12 +1,12 @@
-import sponge from '../../sponge-bob.svg'
 import { Marker } from "@react-google-maps/api"
+import marker from '../../assets/img/pngwing.com.png'
 
 export const CurrentLocationMarker = ({position}) => {
   return (
     <Marker position={position} icon={{
-      url: sponge,
+      url: marker,
       scaledSize: {
-        width: 50,
+        width: 40,
         height: 50
       }
     }} />

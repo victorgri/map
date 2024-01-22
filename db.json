@@ -1,0 +1,94 @@
+{
+  "markers": [
+    {
+      "description": "sdsd",
+      "id": 1,
+      "pos": {
+        "lat": 47.48,
+        "lng": 34.4
+      },
+      "tag": "dog",
+      "title": "ddd"
+    },
+    {
+      "description": "sdsd",
+      "id": 2,
+      "pos": {
+        "lat": 47.23,
+        "lng": 33.59
+      },
+      "tag": "dog",
+      "title": "ddd"
+    },
+    {
+      "description": "sdsd",
+      "id": 3,
+      "pos": {
+        "lat": 47.55,
+        "lng": 33.01
+      },
+      "tag": "cat",
+      "title": "ddd"
+    },
+    {
+      "description": "sdsd",
+      "id": 4,
+      "pos": {
+        "lat": 47.01,
+        "lng": 33.02
+      },
+      "tag": "cat",
+      "title": "ddd"
+    },
+    {
+      "id": 5,
+      "pos": {
+        "lat": 47.9,
+        "lng": 33.4
+      },
+      "title": [],
+      "description": "",
+      "tag": ""
+    },
+    {
+      "id": 6,
+      "pos": {
+        "lat": 47.94,
+        "lng": 33.4
+      },
+      "title": "g",
+      "description": "g",
+      "tag": "dog"
+    },
+    {
+      "id": 7,
+      "pos": {
+        "lat": 47.9,
+        "lng": 33.55
+      },
+      "title": "sd",
+      "description": "sdsd",
+      "tag": "cat"
+    },
+    {
+      "id": 8,
+      "pos": {
+        "lat": 47.87,
+        "lng": 33.4
+      },
+      "title": "sdfdf",
+      "description": "sss",
+      "tag": "dog"
+    },
+    {
+      "id": 9,
+      "pos": {
+        "lat": 48.09,
+        "lng": 33.4
+      },
+      "title": "asd",
+      "description": "asdda",
+      "tag": "cat"
+    }
+  ]
+}

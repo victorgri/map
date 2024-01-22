@@ -1,14 +1,26 @@
 import React, { useContext } from "react";
-import { CenterContext } from '../../context';
+import Select from 'react-select';
+
+import { Context } from '../../context';
+import './Popup.css';
+import { defaultCenter, options} from '../../assets/constants';
 
 
 const Popup = ({ formData, onInputChange, onSave, onCancel }) => {
-  const { center, setCenter, setLabel, setId } = useContext(CenterContext);
+  const {
+    center,
+    setCenter,
+    setLabel,
+    setId,
+    setDesc,
+    setTag,
+    message
+  } = useContext(Context);
 
   return (
-    <div className="popup">
-      <label>
-        Lat:
+    <form className="popup">
+      <label className="popup__item">
+        Latitude:
         <input
           type="number"
           step={0.01}
@@ -22,8 +34,8 @@ const Popup = ({ formData, onInputChange, onSave, onCancel }) => {
           }}
         />
       </label>
-      <label>
-        Lng:
+      <label className="popup__item">
+        Longetude:
         <input
           type="number"
           step={0.01}
@@ -37,30 +49,43 @@ const Popup = ({ formData, onInputChange, onSave, onCancel }) => {
           }}
         />
       </label>
-      <label>
+      <label className="popup__item">
         Name:
         <input
           type="text"
           onInput={(e) => {
-            e ? setLabel(e.target.value) : setLabel('');
+            e.target.value.length ? setLabel(e.target.value) : setLabel('');
           }}
         />
       </label>
-      <label>
+      <label className="popup__item">
         Description:
         <input
           type="text"
+          onInput={(e) => {
+            e.target ? setDesc(e.target.value) : setDesc('');
+          }}
+        />
+      </label>
+      <label className="popup__item">
+        Tag: 
+        <Select
+          options={options}
+          style={{ width: '100px' }}
+          onChange={(e) => setTag(e.value)}
         />
       </label>
 
       <button
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           setId(prev => prev + 1);
-        onSave();
-
-      }} className="button">Зберегти/Редагувати</button>
+          onSave();
+          setCenter(defaultCenter)
+        }} className="button">Зберегти/Редагувати</button>
       <button onClick={onCancel} className="button">Скасувати</button>
-    </div>
+      <div>{message}</div>
+    </form>
   );
 };
 

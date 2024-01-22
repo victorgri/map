@@ -1,11 +1,12 @@
-import { GoogleMap, Marker } from "@react-google-maps/api";
-import { useCallback, useContext, useRef, useState } from "react";
+import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import React, { useCallback, useContext, useRef, useState } from "react";
 
 import './Map.css';
 import Popup from "../Popup/Popup";
 import { CurrentLocationMarker } from "../CurrentLocationMarker/CurrentLocationMarker";
-import { CenterContext } from "../../context";
-import markerImg from '../../assets/img/sponge-bob.svg';
+import { Context } from "../../context";
+import dog from '../../assets/img/dog.svg';
+import cat from '../../assets/img/cat.svg';
 
 const containerStyle = {
   width: '100%',
@@ -26,15 +27,14 @@ const defaulOptions = {
   fullscreenControll: true,
 };
 
-export const Map = () => {
+export const Map = React.memo(() => {
   const {
     addMarker,
     center,
     markers,
     label,
-    id,
-    setId
-  } = useContext(CenterContext);
+    id
+  } = useContext(Context);
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [formData, setFormData] = useState({
     longitude: 0,
@@ -43,8 +43,14 @@ export const Map = () => {
     description: "",
     tag: "",
   });
+  const [activeMArker, setActiveMarker] = useState(null);
+  const handleActiveMarker = (marker) => {
+    if (marker === activeMArker) {
+      return;
+    }
+    setActiveMarker(marker);
+  };
 
-  console.log(markers);
 
   const openPopup = () => {
 
@@ -60,15 +66,16 @@ export const Map = () => {
   };
 
   const handleSave = () => {
-    setId(prev => prev + 1)
-    addMarker(center, id, label);
-    closePopup();
+    addMarker(center, id, label, closePopup);
   };
 
   const mapRef = useRef(undefined)
 
   const onLoad = useCallback(function callback(map) {
     mapRef.current = map;
+    const bounds = new window.google.maps.LatLngBounds();
+    console.log(bounds.getNorthEast())
+    // console.log(bounds);
   }, []);
 
   const onUnmount = useCallback(function callback(map) {
@@ -84,18 +91,41 @@ export const Map = () => {
         onLoad={onLoad}
         onUnmount={onUnmount}
         options={defaulOptions}
-        onClick={openPopup}
+        onClick={() => {
+          openPopup();
+          setActiveMarker(null)
+        }}
+        panTo={(latLng) => console.log(latLng)}
       >
         <CurrentLocationMarker position={center} />
-        {
-          markers.map(marker => (
-          <Marker
-            position={marker.pos}
-            label={marker.title}
-            img={markerImg}
-            key={marker.key}
-          />
-          ))
+        { 
+          markers.map(marker => {
+            return (
+              <Marker
+                position = { marker.pos }
+                icon = {{
+                  url: marker.tag === 'dog' ? dog : cat,
+                    scaledSize: {
+                      width: 40,
+                      height: 50
+                    }
+                  }
+                }
+                key={marker.id}
+                desc={marker.description}
+                onClick={() => handleActiveMarker(marker.id)}
+              >
+                {activeMArker === marker.id ? (
+                  <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                    <div>
+                      <h2>{marker.title}</h2>
+                      <p>{marker.description}</p>
+                    </div>
+                  </InfoWindow>
+                ) : null}
+              </Marker>
+            )
+          })
         }
         {isPopupOpen && (
           <Popup
@@ -108,4 +138,4 @@ export const Map = () => {
       </GoogleMap>
     </div>
   )
-}
+})
