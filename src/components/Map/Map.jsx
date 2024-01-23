@@ -28,6 +28,10 @@ const defaulOptions = {
 };
 
 export const Map = React.memo(() => {
+  const [latMin, setLatMin] = useState(47.444572973727844);
+  const [latMax, setLatMax] = useState(48.174097000428254);
+  const [lngMin, setLngMin] = useState(32.229956054687484);
+  const [lngMax, setLngMax] = useState(34.520605468749984);
   const {
     addMarker,
     center,
@@ -35,6 +39,7 @@ export const Map = React.memo(() => {
     label,
     id
   } = useContext(Context);
+  const [map, setMap] = useState(null);
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [formData, setFormData] = useState({
     longitude: 0,
@@ -71,22 +76,28 @@ export const Map = React.memo(() => {
 
   const mapRef = useRef(undefined)
 
-  const onLoad = useCallback(function callback(map) {
-    mapRef.current = map;
-    const bounds = new window.google.maps.LatLngBounds();
-    console.log(bounds.getNorthEast())
-    // console.log(bounds);
-  }, []);
+  const onLoad = (map) => {
+    setMap(map)
+  };
 
   const onUnmount = useCallback(function callback(map) {
     mapRef.current = undefined;
   }, []);
+
+  const onPositionChanged = (e) => {
+    const viewedMap = map.getBounds().toJSON();
+    setLatMin(viewedMap.south);
+    setLatMax(viewedMap.north);
+    setLngMin(viewedMap.west);
+    setLngMax(viewedMap.east);
+  }
 
   return (
     <div className="container">
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
+        onDragEnd={onPositionChanged}
         zoom={10}
         onLoad={onLoad}
         onUnmount={onUnmount}
@@ -98,18 +109,24 @@ export const Map = React.memo(() => {
         panTo={(latLng) => console.log(latLng)}
       >
         <CurrentLocationMarker position={center} />
-        { 
-          markers.map(marker => {
+        {
+          markers.filter(m => (
+            m.pos.lat > latMin
+            && m.pos.lat < latMax
+            && m.pos.lng > lngMin
+            && m.pos.lng < lngMax
+          ))
+            .map(marker => {
             return (
               <Marker
-                position = { marker.pos }
-                icon = {{
+                position={marker.pos}
+                icon={{
                   url: marker.tag === 'dog' ? dog : cat,
-                    scaledSize: {
-                      width: 40,
-                      height: 50
-                    }
+                  scaledSize: {
+                    width: 40,
+                    height: 50
                   }
+                }
                 }
                 key={marker.id}
                 desc={marker.description}

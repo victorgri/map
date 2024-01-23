@@ -2,7 +2,7 @@
   "markers": [
     {
       "description": "sdsd",
-      "id": 1,
+      "id": "1",
       "pos": {
         "lat": 47.48,
         "lng": 34.4
@@ -12,7 +12,7 @@
     },
     {
       "description": "sdsd",
-      "id": 2,
+      "id": "2",
       "pos": {
         "lat": 47.23,
         "lng": 33.59
@@ -22,7 +22,7 @@
     },
     {
       "description": "sdsd",
-      "id": 3,
+      "id": "3",
       "pos": {
         "lat": 47.55,
         "lng": 33.01
@@ -32,7 +32,7 @@
     },
     {
       "description": "sdsd",
-      "id": 4,
+      "id": "4",
       "pos": {
         "lat": 47.01,
         "lng": 33.02
@@ -41,7 +41,7 @@
       "title": "ddd"
     },
     {
-      "id": 5,
+      "id": "5",
       "pos": {
         "lat": 47.9,
         "lng": 33.4
@@ -51,7 +51,7 @@
       "tag": ""
     },
     {
-      "id": 6,
+      "id": "6",
       "pos": {
         "lat": 47.94,
         "lng": 33.4
@@ -61,7 +61,7 @@
       "tag": "dog"
     },
     {
-      "id": 7,
+      "id": "7",
       "pos": {
         "lat": 47.9,
         "lng": 33.55
@@ -71,7 +71,7 @@
       "tag": "cat"
     },
     {
-      "id": 8,
+      "id": "8",
       "pos": {
         "lat": 47.87,
         "lng": 33.4
@@ -81,13 +81,73 @@
       "tag": "dog"
     },
     {
-      "id": 9,
+      "id": "9",
       "pos": {
         "lat": 48.09,
         "lng": 33.4
       },
       "title": "asd",
       "description": "asdda",
+      "tag": "cat"
+    },
+    {
+      "id": 10,
+      "pos": {
+        "lat": 48.03,
+        "lng": 33.48
+      },
+      "title": [],
+      "description": "",
+      "tag": ""
+    },
+    {
+      "id": 11,
+      "pos": {
+        "lat": 47.9,
+        "lng": 31.44
+      },
+      "title": "new",
+      "description": "vvvv",
+      "tag": "dog"
+    },
+    {
+      "id": 12,
+      "pos": {
+        "lat": 46.98,
+        "lng": 33.4
+      },
+      "title": "dfgdfg",
+      "description": "dfgdfg",
+      "tag": "dog"
+    },
+    {
+      "id": 13,
+      "pos": {
+        "lat": 47.9,
+        "lng": 33.4
+      },
+      "title": "fffff",
+      "description": "fffff",
+      "tag": "cat"
+    },
+    {
+      "id": 14,
+      "pos": {
+        "lat": 47.9,
+        "lng": 30.95
+      },
+      "title": "vvvv",
+      "description": "vvvv",
+      "tag": "dog"
+    },
+    {
+      "id": 15,
+      "pos": {
+        "lat": 47.99,
+        "lng": 33.28
+      },
+      "title": "ммм",
+      "description": "ммм",
       "tag": "cat"
     }
   ]

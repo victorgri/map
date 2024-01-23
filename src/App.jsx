@@ -10,6 +10,7 @@ const libraries = ['places'];
 
 
 export const App = () => {
+  const [map, setMap] = useState(null);
 
   const [tag, setTag] = useState('');
   const [desc, setDesc] = useState('');
@@ -33,8 +34,6 @@ export const App = () => {
         setId(dataFromServer.length + 1)
       });
   }, []);
-
-  console.log(markers);
 
   const addMarker = (pos, key, label, closePopup) => {
     const marker = {
@@ -62,8 +61,6 @@ export const App = () => {
       });
   }
 
-  console.log(markers);
-
   return (
     <Context.Provider value={{
       center,
@@ -78,18 +75,11 @@ export const App = () => {
       setDesc,
       tag,
       setTag,
-      message
+      message,
+      setMap,
+      map
     }}>
       <div className="app">
-        <label htmlFor="searchField" style={{
-          position: 'fixed',
-          top: '10px',
-          left: '10px',
-          zIndex: '1'
-        }}>
-          Search place:
-          <input type="text" id="seachField" />
-        </label>
         {isLoaded ? <Map center={center} /> : <h2>Loading...</h2>}
       </div>
     </Context.Provider>
