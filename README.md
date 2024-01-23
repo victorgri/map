@@ -1,3 +1,16 @@
+#Map app using React + google maps
+
+To start an app you need:
+-clone this repo
+-open your folder in vs code
+-create .env file
+-create variable REACT_APP_API_KEY=your api key from google maps
+- open terminal
+-type npm i
+-type npx json-server db.json -p 3030
+- open one more terminal
+- type npm start
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
